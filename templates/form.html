@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FWI Prediction</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(to right, #eef2f3, #8e9eab);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #fff;
+            padding: 20px 50px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            width: 95%;
+            max-width: 750px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 22px;
+        }
+        form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 13px 60px;
+        }
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 4px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 7px 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 13px;
+            transition: border-color 0.2s ease;
+        }
+        input[type="text"]:focus {
+            border-color: #0078d7;
+            box-shadow: 0 0 3px rgba(0,120,215,0.4);
+            outline: none;
+        }
+        .btn-container {
+            grid-column: span 2;
+            text-align: center;
+            margin-top: 10px;
+        }
+        button {
+            background-color: #0078d7;
+            color: white;
+            padding: 10px 30px;
+            font-size: 14px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background-color: #005fa3;
+        }
+        h3 {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+            font-size: 15px;
+        }
+        @media (max-width: 600px) {
+            form {
+                grid-template-columns: 1fr;
+            }
+            .btn-container {
+                grid-column: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>FWI Prediction Form</h2>
+        <form action="{{ url_for('predict_datapoint') }}" method="post">
+            <div>
+                <label for="Temperature">Temperature</label>
+                <input type="text" id="Temperature" name="Temperature" placeholder="Enter Temperature" required>
+            </div>
+
+            <div>
+                <label for="RH">Relative Humidity (RH)</label>
+                <input type="text" id="RH" name="RH" placeholder="Enter RH" required>
+            </div>
+
+            <div>
+                <label for="Ws">Wind Speed (Ws)</label>
+                <input type="text" id="Ws" name="Ws" placeholder="Enter Wind Speed" required>
+            </div>
+
+            <div>
+                <label for="Rain">Rainfall (Rain)</label>
+                <input type="text" id="Rain" name="Rain" placeholder="Enter Rainfall" required>
+            </div>
+
+            <div>
+                <label for="FFMC">Fine Fuel Moisture Code (FFMC)</label>
+                <input type="text" id="FFMC" name="FFMC" placeholder="Enter FFMC" required>
+            </div>
+
+            <div>
+                <label for="DMC">Duff Moisture Code (DMC)</label>
+                <input type="text" id="DMC" name="DMC" placeholder="Enter DMC" required>
+            </div>
+
+            <div>
+                <label for="ISI">Initial Spread Index (ISI)</label>
+                <input type="text" id="ISI" name="ISI" placeholder="Enter ISI" required>
+            </div>
+
+            <div>
+                <label for="Classes">Fire Class</label>
+                <input type="text" id="Classes" name="Classes" placeholder="Enter Class" required>
+            </div>
+
+            <div>
+                <label for="Region">Region</label>
+                <input type="text" id="Region" name="Region" placeholder="Enter Region" required>
+            </div>
+
+            <div class="btn-container">
+                <button type="submit">Predict</button>
+            </div>
+        </form>
+        <h2>The predicted FWI value is: {{ result }}</h2>
+    </div>
+</body>
+</html>
