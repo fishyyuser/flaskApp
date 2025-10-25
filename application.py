@@ -2,12 +2,17 @@ import pickle
 from flask import Flask, request, render_template
 import numpy as np
 import pandas as pd
+import os
 
 application = Flask(__name__)
 app=application
 # Load model and scaler
-ridge_model = pickle.load(open('models/ridge.pkl', 'rb'))
-standard_scaler = pickle.load(open('models/Scaler.pkl', 'rb'))
+
+model_path=os.path.join("models","ridge.pkl")
+scaler_path=os.path.join('models','Scaler.pkl')
+
+ridge_model = pickle.load(open(model_path, 'rb'))
+standard_scaler = pickle.load(open(scaler_path, 'rb'))
 
 @app.route('/')
 def home():
@@ -44,5 +49,4 @@ def predict_datapoint():
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8080))
-    application.run(host="0.0.0.0", port=port, debug=False)
+    app.run(host="0.0.0.0")
